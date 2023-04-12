@@ -1,26 +1,5 @@
 import styled from "styled-components"
 
-export default function HengmanDrawning() {
-  return (
-    <div style={{position: 'relative',
-                display:'flex',
-                flexDirection:'column',
-                alignItems:'center'
-                }}>
-      
-      <LeftLeg/>
-      <RightLeg/>
-      <LeftArm/>
-      <RightArm/>
-      <Body/>
-      <Head/>
-      <VerticalLineSmall/>
-      <HorizontalLine/>
-      <VerticalLine/>
-      <BaseLine/>
-    </div>
-  )
-}
 
 const BaseLine =styled.div `
 height: 10px;
@@ -74,15 +53,6 @@ top: 80px;
 right: 40px;
 `
 
-const LeftArm = styled.div `
-height: 10px;
-width: 50px;
-background-color: white;
-position: absolute;
-top: 90px;
-right: 40px;
-rotate: 30deg;
-`
 
 const RightArm = styled.div `
 height: 10px;
@@ -93,6 +63,17 @@ top: 90px;
 right: 0px;
 rotate: -30deg;
 `
+
+const LeftArm = styled.div `
+height: 10px;
+width: 50px;
+background-color: white;
+position: absolute;
+top: 90px;
+right: 40px;
+rotate: 30deg;
+`
+
 
 const RightLeg = styled.div `
 height: 10px;
@@ -113,3 +94,31 @@ top: 163px;
 right: 40px;
 rotate: -30deg;
 `
+
+const bodyParts = [Head,Body,RightArm,LeftArm,RightLeg,LeftLeg]
+
+interface HangmanDrawningProps {
+  numberOfGuesses :number
+}
+
+export default function HengmanDrawning({numberOfGuesses}:HangmanDrawningProps) {
+ 
+  return (
+    <div style={{position: 'relative',
+                display:'flex',
+                flexDirection:'column',
+                alignItems:'center'
+                }}>
+      
+      {bodyParts.slice(0,numberOfGuesses).map((BodyParty,index) => {
+        return <BodyParty key={index}/>
+      })}
+      <VerticalLineSmall/>
+      <HorizontalLine/>
+      <VerticalLine/>
+      <BaseLine/>
+    </div>
+  )
+}
+
+
